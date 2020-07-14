@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {globalStyles} from '../styles/global';
-import {createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 // import LoadingScreen from 'LoadingScreen';
-import LoginScreen from 'LoginScreen';
+import LoginScreen from './LoginScreen';
 // import DashBoardScreen from 'DashBoardScreen';
 
 export default class Login extends React.Component{
