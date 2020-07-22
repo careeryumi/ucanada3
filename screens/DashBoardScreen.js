@@ -1,11 +1,24 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text } from 'react-native';
+import React, { Component } from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 
-
-export default function DashBoardScreen(){
-    return (
-        <View style={globalStyles.container}>
-            <Text>This is a Loading Screen..</Text>
-        </View>
-    )
+class DashboardScreen extends React.Component{
+    render(){
+        return (
+            <View style={StyleSheet.container}>
+                <Text>This is a Dashboard..</Text>
+            </View>
+        );
+    }
 }
+
+export default DashboardScreen;
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:'#fff',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+});
+

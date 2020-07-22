@@ -2,28 +2,54 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {globalStyles} from '../styles/global';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-// import LoadingScreen from 'LoadingScreen';
-import LoginScreen from './LoginScreen';
-// import DashBoardScreen from 'DashBoardScreen';
+import Logged from './Logged.js';
+import LoginPage from './LoginPage.js';
+// import LoadingScreen from './LoadingScreen';
+// import LoginScreen from './LoginScreen';
+// import DashboardScreen from './DashboardScreen';
 
-export default class Login extends React.Component{
-    render(){
-        return <AppNavigator />;
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+import fire from './fire';
+
+// import { firebaseConfig } from '../config';
+// firebase.initializeApp(firebaseConfig);
+
+class Login extends React.Component {
+
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        user: null,
+      };
+  
+      this.authListener = this.authListener.bind(this);
     }
-}
+  
+    componentDidMount() {
+      this.authListener();
+    }
+  
+    authListener() {
+      fire.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({ user });
+        } else {
+          this.setState({ user: null });
+        }
+      })
+    }
+  
+    render() {
+      return (
+          <div>
+            {this.state.user ? (<Logged/ >) : (<LoginPage/ >)}
+          </div>
 
-const AppSwitchNavigator = createSwitchNavigator({
-    LoginScreen: LoginScreen,
-});
-
-const AppNavigator = createAppContainer(AppSwitchNavigator);
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#fff',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-});
-
+      );
+    }
+  }
+  
+  export default Login;
